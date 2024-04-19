@@ -42,7 +42,7 @@ class TouristicAgency
         {
             foreach (Tour tour in tours)
             {
-                writer.WriteLine($"{tour.Destination},{tour.Duration},{tour.Price}");
+                writer.WriteLine($"Направление поездки: {tour.Destination}, Продолжительность: {tour.Duration}, Цена: {tour.Price}");
             }
         }
     }
@@ -56,29 +56,46 @@ class Program
 
 
         // запраш колво туров у юзера
-        Console.Write("Введите колво туров: ");
-        int n = int.Parse(Console.ReadLine());
 
-        // заполн массива
-        for (int i = 0; i < n; i++)
-        {
-            Console.Write("Введите направление поездки: "); // место назначения
-            string destination = Console.ReadLine();
-            Console.Write("Введите продолжительность: ");
-            int duration = int.Parse(Console.ReadLine());
-            Console.Write("Введите цену: ");
-            double price = double.Parse(Console.ReadLine());
+        try
+        {  
+            Console.Write("Введите кол-во туров: ");
+            int n = int.Parse(Console.ReadLine());
 
-            Tour tour = new Tour(destination, duration, price);
-            agency.AddTour(tour);
+            for (int i = 0; i < n; i++)
+            {
+                try
+                {
+                    Console.Write("Введите направление поездки: ");
+                    string destination = Console.ReadLine();
+                    Console.Write("Введите продолжительность: ");
+                    int duration = int.Parse(Console.ReadLine());
+                    Console.Write("Введите цену: ");
+                    double price = double.Parse(Console.ReadLine());
+
+                    Tour tour = new Tour(destination, duration, price);
+                    agency.AddTour(tour);
+
+
+
+                    // сорт массива
+                    agency.SortTours();
+
+                    // сохр уже отсорт массива в файл
+                    agency.SaveToFile("tours.txt");
+
+                    Console.WriteLine("Туры были отсоротированы и сохранены в tours.txt");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Некорректный формат данных. Попробуйте еще раз.");
+                    i--; // уменьшаем счетчик
+                }
+            }
         }
-
-        // сорт массива
-        agency.SortTours();
-
-        // сохр уже отсорт массива в файл
-        agency.SaveToFile("tours.txt");
-
-        Console.WriteLine("Туры были отсоротированы и сохранены в tours.txt");
+        catch (FormatException)
+        {
+            Console.WriteLine("Некорректный формат данных для количества туров.");
+        }
     }
 }
