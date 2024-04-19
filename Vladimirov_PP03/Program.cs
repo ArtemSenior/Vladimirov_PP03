@@ -84,18 +84,20 @@ class Program
                     // сохр уже отсорт массива в файл
                     agency.SaveToFile("tours.txt");
 
-                    Console.WriteLine("Туры были отсоротированы и сохранены в tours.txt");
+                    
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Некорректный формат данных. Попробуйте еще раз.");
                     i--; // уменьшаем счетчик
                 }
+                
             }
         }
         catch (FormatException)
         {
             Console.WriteLine("Некорректный формат данных для количества туров.");
         }
+        Console.WriteLine("Туры были отсоротированы и сохранены в tours.txt");
     }
 }
