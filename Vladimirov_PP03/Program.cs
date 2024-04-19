@@ -30,9 +30,9 @@ class TouristicAgency
         tours.Sort((x, y) =>
         {
             if (x.Duration != y.Duration)
-                return y.Duration.CompareTo(x.Duration); // Сортировка по длительности в порядке убывания
+                return y.Duration.CompareTo(x.Duration); // сортировка по длительности в порядке убывания
             else
-                return y.Price.CompareTo(x.Price); //Если продолжительность одинакова, сортируется по убыванию цены 
+                return y.Price.CompareTo(x.Price); // ессли продолжительность одинакова, сортируется по убыванию цены 
         });
     }
 
@@ -48,3 +48,37 @@ class TouristicAgency
     }
 }
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        TouristicAgency agency = new TouristicAgency();
+
+
+        // запраш колво туров у юзера
+        Console.Write("Введите колво туров: ");
+        int n = int.Parse(Console.ReadLine());
+
+        // заполн массива
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Введите место назначения: ");
+            string destination = Console.ReadLine();
+            Console.Write("Введите продолжительность: ");
+            int duration = int.Parse(Console.ReadLine());
+            Console.Write("Введите цену: ");
+            double price = double.Parse(Console.ReadLine());
+
+            Tour tour = new Tour(destination, duration, price);
+            agency.AddTour(tour);
+        }
+
+        // сорт массива
+        agency.SortTours();
+
+        // сохр уже отсорт массива в файл
+        agency.SaveToFile("tours.txt");
+
+        Console.WriteLine("Туры были отсоротированы и сохранены в tours.txt");
+    }
+}
