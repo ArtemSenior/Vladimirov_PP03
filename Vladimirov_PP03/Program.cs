@@ -10,9 +10,9 @@ class Tour
 
     public Tour(string destination, int duration, double price)
     {
-        Destination = destination; // место назначения
-        Duration = duration; // продолжительность
-        Price = price; // цена
+        Destination = destination; // направление поездки место назначения  string
+        Duration = duration; // продолжительность int
+        Price = price; // цена double
     }
 }
 
@@ -30,9 +30,9 @@ class TouristicAgency
         tours.Sort((x, y) =>
         {
             if (x.Duration != y.Duration)
-                return y.Duration.CompareTo(x.Duration); // сортировка по длительности в порядке убывания
+                return y.Duration.CompareTo(x.Duration); // Сортировка по длительности в порядке убывания
             else
-                return y.Price.CompareTo(x.Price); // ессли продолжительность одинакова, сортируется по убыванию цены 
+                return y.Price.CompareTo(x.Price); // Если продолжительность одинакова, сортируется по убыванию цены 
         });
     }
 
@@ -62,7 +62,7 @@ class Program
         // заполн массива
         for (int i = 0; i < n; i++)
         {
-            Console.Write("Введите место назначения: ");
+            Console.Write("Введите направление поездки: "); // место назначения
             string destination = Console.ReadLine();
             Console.Write("Введите продолжительность: ");
             int duration = int.Parse(Console.ReadLine());
